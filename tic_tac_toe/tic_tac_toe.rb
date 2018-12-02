@@ -13,12 +13,12 @@ class Board
                   [ '3', '-', '-', '-']]
   end
 
-  def update_board(number, letter)
+  def update_board(number, letter, player)
 
-    if !(number.to_i > 0 && number.to_i < 4) || 
-      letter != "A" || 
-      letter != "B" || 
-      letter != "C"
+    if !(number.to_i > 0 && number.to_i < 4) || !(
+      letter == "A" || 
+      letter == "B" || 
+      letter == "C")
       puts "error: incorrect input. Number 1-3 and Letter A, B or C"
       return
     end
@@ -36,7 +36,7 @@ class Board
     @board_array.map do |y|
       y.map do |x|
         if x == number
-          y[0 + letter] = "X"
+          y[0 + letter] = player == "p1" ? "X" : "O"
           return
         end
       end
@@ -62,5 +62,5 @@ number = gets.chomp
 puts "Letter: "
 letter = gets.chomp.upcase
 puts number + letter
-board.update_board(number, letter)
+board.update_board(number, letter, "p2")
 board.print_board
